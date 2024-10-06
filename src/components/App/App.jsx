@@ -15,7 +15,7 @@ const App = () => {
           <Route path="/" element={<Quote />}></Route>
           <Route path="/wiki" element={<Wiki />}></Route>
           <Route path="/todo" element={<TodoList />}></Route>
-          <Route path="/*" element={<div>Не найдено</div>}></Route>
+          <Route path="*" element={<div>Не найдено</div>}></Route>
         </Routes>
       </div>
     </BrowserRouter>
