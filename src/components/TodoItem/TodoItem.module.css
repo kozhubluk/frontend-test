@@ -1,0 +1,24 @@
+.todo {
+    padding: 10px;
+    display: flex;
+    gap: 4px;
+
+    input[type='checkbox'] {
+        margin-right: 10px;
+    }
+
+    .remove {
+        align-self: flex-end;
+
+        svg {
+            width: 16px;
+        }
+    }
+}
+
+.done {
+    input[type='text'] {
+        text-decoration: line-through;
+        opacity: .5;
+    }
+}

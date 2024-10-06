@@ -1,0 +1,17 @@
+.article {
+    display: block;
+    border: 1px solid #b0b8bb;
+    border-radius: 10px;
+    padding: 10px;
+    -webkit-box-shadow: 21px 15px 0px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 6px 6px 0px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 6px 6px 0px 0px rgba(34, 60, 80, 0.2);
+
+    .title {
+        font-weight: 500;
+    }
+
+    .text {
+        font-size: 12pt;
+    }
+}   

@@ -1,0 +1,42 @@
+.wiki {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+
+    h1 {
+        font-weight: 500;
+        font-size: 16pt;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    .input, .search-button, .random-button {
+        border: 1px solid #b0b8bb;
+        padding: 4px 10px;
+        border-radius: 10px 0 0 10px;
+    }
+
+    .search-button:disabled {
+        color: rgba(0, 0, 0, 0.303);
+    }
+
+    .search-button {
+        border-left: none;
+        margin-right: 4px;
+        border-radius: 0 10px 10px 0;
+    }
+
+    .random-button {
+        border-radius: 10px;
+    }
+
+    .articles {
+        max-width: 900px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+}

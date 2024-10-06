@@ -1,39 +1,60 @@
 import { observer } from 'mobx-react-lite';
 import { todoStore } from '../../store/TodoStore';
 import TodoItem from '../TodoItem/TodoItem';
+import styles from './TodoList.module.css';
 
 const TodoList = observer(() => {
-  const { todoArray, removeTodo, addTodo, todoTitle, titleHandler, toggleCompleted } = todoStore;
+  const {
+    todoArray,
+    removeTodo,
+    addTodo,
+    updateTodo,
+    todoTitle,
+    titleHandler,
+    removeFirstTodo,
+    removeLastTodo,
+  } = todoStore;
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    addTodo();
+  };
+
+  const handleTitleChange = (e) => {
+    titleHandler(e.target.value);
+  };
+
   return (
-    <div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          addTodo();
-        }}>
+    <div className={styles['todo-list']}>
+      <form onSubmit={handleFormSubmit}>
         <input
           type="text"
+          placeholder="Введите название..."
           value={todoTitle}
-          onChange={(e) => {
-            titleHandler(e.target.value);
-          }}
+          onChange={handleTitleChange}
         />
-        <input type="submit" value="+" />
+        <input type="submit" value="Добавить" />
       </form>
-      {!!todoArray.length
-        ? todoArray.map((item) => (
+      <div className={styles.buttons}>
+        <button onClick={removeFirstTodo}>Удалить с начала</button>
+        <button onClick={removeLastTodo}>Удалить с конца</button>
+      </div>
+      <div className={styles.container}>
+        {todoArray.length > 0 ? (
+          todoArray.map((item) => (
             <TodoItem
               key={item.id}
               id={item.id}
               title={item.title}
               completed={item.completed}
-              removeItem={() => {
-                removeTodo(item.id);
-              }}
-              toggleCompleted={toggleCompleted}
+              removeItem={removeTodo}
+              updateTodo={updateTodo}
             />
           ))
-        : 'Пустой списко дел'}
+        ) : (
+          <p className={styles.empty}>Добавьте новые задачи!</p>
+        )}
+      </div>
     </div>
   );
 });

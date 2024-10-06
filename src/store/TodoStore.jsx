@@ -31,16 +31,30 @@ class TodoStore {
     }
   };
 
+  updateTodo = (id, newProperties) => {
+    let target = this.todoArray.findIndex((item) => item.id === id);
+
+    if (target !== -1) {
+      if (newProperties.hasOwnProperty('title'))
+        newProperties.title.trim()
+          ? (newProperties.title = newProperties.title.trim())
+          : delete newProperties.title;
+      this.todoArray[target] = { ...this.todoArray[target], ...newProperties };
+      localStorage.setItem('todos', JSON.stringify(this.todoArray));
+    }
+  };
+
   removeTodo = (id) => {
     this.todoArray = this.todoArray.filter((item) => item.id !== id);
     localStorage.setItem('todos', JSON.stringify(this.todoArray));
   };
 
-  toggleCompleted = (id) => {
-    this.todoArray = this.todoArray.map((item) =>
-      item.id === id ? { ...item, completed: !item.completed } : item,
-    );
-    localStorage.setItem('todos', JSON.stringify(this.todoArray));
+  removeFirstTodo = () => {
+    this.todoArray.shift();
+  };
+
+  removeLastTodo = () => {
+    this.todoArray.pop();
   };
 
   completeAll = () => {
