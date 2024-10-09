@@ -22,7 +22,7 @@ class TodoStore {
 
   addTodo = () => {
     if (this.todoTitle.trim()) {
-      const id = this.todoArray.length > 0 ? this.todoArray.at(-1).id + 1 : 0;
+      const id = crypto.randomUUID();
 
       this.todoArray.push({
         id,

@@ -57,12 +57,13 @@ const TodoList = observer(() => {
           {evenMode ? 'Не подсвечивать четные' : 'Подсвечивать четные'}
         </button>
       </div>
-      <div
-        className={`${styles.container} ${evenMode ? styles.even : ''} ${
-          oddMode ? styles.odd : ''
-        }`}>
-        {todos.length > 0 ? (
-          todos.map((item) => (
+
+      {todos.length > 0 ? (
+        <div
+          className={`${styles.container} ${evenMode ? styles.even : ''} ${
+            oddMode ? styles.odd : ''
+          }`}>
+          {todos.map((item) => (
             <TodoItem
               key={item.id}
               id={item.id}
@@ -71,11 +72,11 @@ const TodoList = observer(() => {
               removeItem={removeTodo}
               updateTodo={updateTodo}
             />
-          ))
-        ) : (
-          <p className={styles.empty}>Добавьте новые задачи!</p>
-        )}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <p className={styles.empty}>Добавьте новые задачи!</p>
+      )}
     </div>
   );
 });
