@@ -8,6 +8,10 @@ class TodoStore {
     makeAutoObservable(this);
   }
 
+  get todos() {
+    return [...this.todoArray].sort((a, b) => a.completed - b.completed);
+  }
+
   titleHandler = (title) => {
     this.todoTitle = title;
   };
@@ -50,11 +54,13 @@ class TodoStore {
   };
 
   removeFirstTodo = () => {
-    this.todoArray.shift();
+    this.todoArray = this.todos.slice(1);
+    localStorage.setItem('todos', JSON.stringify(this.todoArray));
   };
 
   removeLastTodo = () => {
-    this.todoArray.pop();
+    this.todoArray = this.todos.slice(0, -1);
+    localStorage.setItem('todos', JSON.stringify(this.todoArray));
   };
 
   completeAll = () => {

@@ -1,18 +1,15 @@
-import { useApi } from '../../hooks/useApi';
-import { useState } from 'react';
 import ArticleCard from '../ArticleCard/ArticleCard';
 import styles from './Wiki.module.css';
 import Preloader from '../Preloader/Preloader';
+import { observer } from 'mobx-react-lite';
+import { wikiStore } from '../../store/WikiStore';
 
-const Wiki = () => {
-  const [{ data, status }, doFetch] = useApi();
-  const [searchValue, setSearchValue] = useState('');
+const Wiki = observer(() => {
+  const { data, status, searchValue, setSearchValue, fetchArticles } = wikiStore;
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    doFetch(
-      `https://en.wikipedia.org/w/api.php?action=query&prop=info&origin=*&format=json&list=search&srsearch=${searchValue}&srlimit=10`,
-    );
+    fetchArticles();
   };
 
   const handleTextChange = (e) => {
@@ -63,6 +60,6 @@ const Wiki = () => {
         ))}
     </div>
   );
-};
+});
 
 export default Wiki;

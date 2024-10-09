@@ -25,7 +25,7 @@
             padding: 8px 12px;
             margin-left: 10px;
             border: none;
-            background-color: #51c1f2;
+            background-color: #2fb5ee;
             color: white;
             border-radius: 4px;
             cursor: pointer;
@@ -33,7 +33,10 @@
     }
 
     .buttons {
-        display: flex;
+        margin-bottom: 20px;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 50% 50%;
         gap: 10px;
     }
 
@@ -50,6 +53,14 @@
         color: #888;
         text-align: center;
         margin-top: 20px;
+    }
+
+    .odd > :nth-child(2n + 1) {
+        background-color: rgb(244, 223, 239);  
+    }
+
+    .even > :nth-child(2n) {
+        background-color: rgb(228, 199, 239);  
     }
 }
   

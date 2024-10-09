@@ -2,10 +2,11 @@ import { observer } from 'mobx-react-lite';
 import { todoStore } from '../../store/TodoStore';
 import TodoItem from '../TodoItem/TodoItem';
 import styles from './TodoList.module.css';
+import { useState } from 'react';
 
 const TodoList = observer(() => {
   const {
-    todoArray,
+    todos,
     removeTodo,
     addTodo,
     updateTodo,
@@ -15,6 +16,9 @@ const TodoList = observer(() => {
     removeLastTodo,
   } = todoStore;
 
+  const [oddMode, setOddMode] = useState(false);
+  const [evenMode, setEvenMode] = useState(false);
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     addTodo();
@@ -22,6 +26,14 @@ const TodoList = observer(() => {
 
   const handleTitleChange = (e) => {
     titleHandler(e.target.value);
+  };
+
+  const toggleOddMode = () => {
+    setOddMode((prev) => !prev);
+  };
+
+  const toggleEvenMode = () => {
+    setEvenMode((prev) => !prev);
   };
 
   return (
@@ -38,10 +50,19 @@ const TodoList = observer(() => {
       <div className={styles.buttons}>
         <button onClick={removeFirstTodo}>Удалить с начала</button>
         <button onClick={removeLastTodo}>Удалить с конца</button>
+        <button onClick={toggleOddMode}>
+          {oddMode ? 'Не подсвечивать нечетные' : 'Подсвечивать нечетные'}
+        </button>
+        <button onClick={toggleEvenMode}>
+          {evenMode ? 'Не подсвечивать четные' : 'Подсвечивать четные'}
+        </button>
       </div>
-      <div className={styles.container}>
-        {todoArray.length > 0 ? (
-          todoArray.map((item) => (
+      <div
+        className={`${styles.container} ${evenMode ? styles.even : ''} ${
+          oddMode ? styles.odd : ''
+        }`}>
+        {todos.length > 0 ? (
+          todos.map((item) => (
             <TodoItem
               key={item.id}
               id={item.id}
